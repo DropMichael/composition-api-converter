@@ -1,0 +1,27 @@
+{
+  "name": "composition-api-converter",
+  "version": "1.0.0",
+  "description": "AST-to-AST Options API to Composition API Converter",
+  "main": "index.js",
+  "scripts": {
+    "transform": "ts-node ./src/index.ts"
+  },
+  "keywords": [
+    "jscodeshift",
+    "AST",
+    "vue"
+  ],
+  "author": "Michael Didion <michael.didion@conciso.de>",
+  "license": "ISC",
+  "dependencies": {
+    "jscodeshift": "^0.15.0"
+  },
+  "devDependencies": {
+    "@types/jscodeshift": "^0.11.6",
+    "@types/node": "^20.5.7",
+    "@vue/compiler-core": "^3.3.4",
+    "@vue/compiler-dom": "^3.3.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
