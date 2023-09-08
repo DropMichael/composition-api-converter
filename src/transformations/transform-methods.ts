@@ -1,5 +1,6 @@
 import {
-  Collection,
+  ArrowFunctionExpression, BlockStatement,
+  Collection, FunctionExpression,
   Identifier,
   JSCodeshift,
   ObjectExpression,
@@ -13,10 +14,26 @@ export function transformMethods(root: Collection<any>, j: JSCodeshift) {
       name: 'methods'
     }
   });
-  methods.forEach(method => {
-    (method.value.value as ObjectExpression).properties.forEach(prop => {
-      root.insertAfter(j.functionDeclaration(j.identifier(((prop as ObjectProperty).key as Identifier).name), (prop as ObjectMethod).params, (prop as ObjectMethod).body));
-    })
-    method.replace();
+  methods.forEach(methodNodePath => {
+    const value = methodNodePath.node.value as ObjectExpression;
+
+    (value.properties as (ObjectMethod|ObjectProperty)[]).forEach(method => {
+      const identifier = j.identifier((method.key as Identifier).name);
+      const isObjectMethod = 'params' in method && 'body' in method && 'async' in method;
+      const { params, body, async, comments, returnType } = isObjectMethod ? method : (method as ObjectProperty).value as ArrowFunctionExpression;
+
+      const declaration = j.functionDeclaration(
+          identifier,
+          params,
+          body as BlockStatement
+      );
+      declaration.async = async;
+      declaration.comments = comments;
+      declaration.returnType = returnType;
+
+      root.insertAfter(declaration);
+    });
   });
+
+  methods.remove();
 }

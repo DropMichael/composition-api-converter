@@ -11,8 +11,8 @@ module.exports = function(fileInfo: FileInfo, api: API, options: Options) {
 
     const rootNode = root.find(j.ExportDefaultDeclaration);
 
-    transformProps(rootNode, j);
     transformMethods(rootNode, j);
+    transformProps(rootNode, j);
 
     return root
         .toSource();

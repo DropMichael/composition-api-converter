@@ -19,6 +19,9 @@ export default {
     methods: {
         incrementCounter(): void {
             this.counter++;
+        },
+        testZwei: async () => {
+            await Promise.resolve(() => this.counter++);
         }
     }
 }
