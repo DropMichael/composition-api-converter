@@ -1,6 +1,6 @@
 import {
   ArrowFunctionExpression, BlockStatement,
-  Collection, FunctionExpression,
+  Collection,
   Identifier,
   JSCodeshift,
   ObjectExpression,

@@ -7,7 +7,11 @@ export default {
     },
     data() {
         return {
-            counter: 0
+            counter: 0,
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
         }
     },
     mounted() {
@@ -17,10 +21,12 @@ export default {
         this.metadata // type: any
     },
     methods: {
+        /* Function description */
         incrementCounter(): void {
             this.counter++;
         },
         testZwei: async () => {
+            /* await incrementation */
             await Promise.resolve(() => this.counter++);
         }
     }

@@ -2,16 +2,16 @@ import {API, FileInfo} from "jscodeshift";
 import {Options} from "jscodeshift/src/core";
 import {transformProps} from "./transformations/transform-props";
 import {transformMethods} from "./transformations/transform-methods";
+import {transformData} from "./transformations/transform-data";
 
 module.exports = function(fileInfo: FileInfo, api: API, options: Options) {
-    console.log(fileInfo.source)
-
     const {j} = api;
     const root = j(fileInfo.source);
 
     const rootNode = root.find(j.ExportDefaultDeclaration);
 
     transformMethods(rootNode, j);
+    transformData(rootNode, j);
     transformProps(rootNode, j);
 
     return root
