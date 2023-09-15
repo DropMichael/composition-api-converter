@@ -5,6 +5,7 @@ export default {
         msg: { type: String, required: true },
         metadata: null
     },
+    emit: ['input'],
     data() {
         return {
             counter: 0,
