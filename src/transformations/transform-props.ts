@@ -1,6 +1,5 @@
 import {Collection, JSCodeshift, ObjectExpression} from "jscodeshift";
 
-
 export function transformProps(root: Collection<any>, j: JSCodeshift) {
     const props = root.find(j.ObjectProperty,
         {key: {name: 'props'}});
